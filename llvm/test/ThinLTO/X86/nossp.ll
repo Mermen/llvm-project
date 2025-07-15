@@ -1,7 +1,7 @@
 ; RUN: split-file %s %t
-; RUN: opt -module-summary %t/a.ll -o %ta.bc
-; RUN: opt -module-summary %t/b.ll -o %tb.bc
-; RUN: llvm-lto2 run %ta.bc %tb.bc -o %tc.bc -save-temps \
+; RUN: opt -ctpa-optimize-ssp=false -module-summary %t/a.ll -o %ta.bc
+; RUN: opt -ctpa-optimize-ssp=false -module-summary %t/b.ll -o %tb.bc
+; RUN: llvm-lto2 run -ctpa-optimize-ssp=false %ta.bc %tb.bc -o %tc.bc -save-temps \
 ; RUN:   -r=%ta.bc,nossp_caller,px \
 ; RUN:   -r=%ta.bc,ssp_caller,px \
 ; RUN:   -r=%ta.bc,nossp_caller2,px \
